@@ -1,0 +1,19 @@
+{
+  "wri":        { "label": "World Resources Institute — Apparel industry environmental impact", "url": "https://www.wri.org/insights/apparel-industrys-environmental-impact-6-graphics" },
+  "selvane":    { "label": "Selvane — Wardrobe carbon, material by material", "url": "https://www.selvane.co/blogs/knowledge/the-carbon-footprint-of-your-wardrobe-a-material-by-material-lifecycle-analysis" },
+  "8bt":        { "label": "8 Billion Trees — Fibre carbon footprints", "url": "https://8billiontrees.com/carbon-offsets-credits/carbon-footprint-of-polyester/" },
+  "matecon":    { "label": "Material Economics — Circular business models for textiles (via Selvane)", "url": "https://www.selvane.co/blogs/knowledge/the-carbon-footprint-of-your-wardrobe-a-material-by-material-lifecycle-analysis" },
+  "devera":     { "label": "Devera — T-shirt LCA benchmark (Ecoinvent 3.9.1)", "url": "https://devera.ai/benchmarks/carbon-footprint-of-a-t-shirt" },
+  "fibe":       { "label": "Fibe — potato-waste fibre (Patacel)", "url": "https://fibe.uk/media" },
+  "springwise": { "label": "Springwise — Fibe / Patacel cost and process", "url": "https://www.springwise.com/innovation/fashion-beauty/textile-fibres-made-out-of-potato-waste/" },
+  "cfj":        { "label": "Collective Fashion Justice — The carbon cost of leather", "url": "https://www.collectivefashionjustice.org/articles/carbon-cost-leather-goods" },
+  "ecocult":    { "label": "EcoCult — Vegan leather alternatives, ranked", "url": "https://ecocult.com/list-vegan-leather-alternatives-ranked/" },
+  "kyrei":      { "label": "Kyrei — Vegan vs real leather data", "url": "https://kyrei.space/blogs/press/leather-alternatives-guide" },
+  "bohema":     { "label": "BOHEMA — Plant-based leathers compared (2026)", "url": "https://en.bohemaclothing.com/blogs/news/plant-based-leathers-compared-cactus-grape-pineapple-corn-2026" },
+  "geopelie":   { "label": "Géopélie — Environmental impact of textile fibres", "url": "https://geopelie.com/en/blogs/blog/the-environmental-impact-of-the-different-textile-fibers" },
+  "ethicalc":   { "label": "Ethical Consumer — Choosing the most sustainable fabric", "url": "https://www.ethicalconsumer.org/fashion-clothing/choosing-most-sustainable-fabric" },
+  "hempf":      { "label": "Hemp Foundation — 7 major fibres and their carbon footprint", "url": "https://hempfoundation.net/7-major-fibers-textiles-in-the-world-and-their-carbon-footprint/" },
+  "tand":       { "label": "Taylor & Francis — Carbon footprint embodied in global fibre trades", "url": "https://www.tandfonline.com/doi/full/10.1080/15440478.2025.2503970" },
+  "cfp":        { "label": "Carbon Footprint of Textile and Clothing Products (ResearchGate)", "url": "https://www.researchgate.net/publication/276193965_Carbon_Footprint_of_Textile_and_Clothing_Products" },
+  "co2e":       { "label": "CO2 Everything — Linen footprint", "url": "https://www.co2everything.com/co2e-of/linen" }
+}

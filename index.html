@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FIBREPRINT — honest material swaps for fashion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+<div class="grain"></div>
+<div class="wrap">
+
+  <header class="mast">
+    <p class="kicker">Material intelligence · v0.1 prototype</p>
+    <h1 class="wordmark">Fibre<em>print</em></h1>
+    <p class="tagline">What does the greener fabric actually cost — in money, carbon, and performance? Pick a conventional material, pick a garment, and see the honest trade-offs against the waste-stream and bio-based alternatives.</p>
+    <div class="scopebar">
+      <span><b>Scope:</b> cradle-to-gate material impact</span>
+      <span><b>Not:</b> full garment lifecycle or retail price</span>
+      <span><b>Every figure:</b> sourced + confidence-rated</span>
+    </div>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-mode="compare">Compare two materials</button>
+    <button class="tab" role="tab" aria-selected="false" data-mode="recommend">Find the best alternative</button>
+  </div>
+
+  <div class="panel">
+    <p class="panel-h"><span class="step clay">1</span> Conventional material to replace</p>
+    <div class="chips" id="convChips"></div>
+  </div>
+
+  <div class="panel">
+    <p class="panel-h"><span class="step">2</span> Garment / product</p>
+    <div class="chips" id="prodChips"></div>
+  </div>
+
+  <div class="panel" id="altPanel">
+    <p class="panel-h"><span class="step">3</span> <span id="step3label">Cleaner alternative</span></p>
+    <div class="chips" id="thirdChips"></div>
+  </div>
+
+  <div id="result"><p class="hint">Make your selections above to see the comparison.</p></div>
+
+  <details class="method">
+    <summary>Methodology, data &amp; sources <span class="plus">+</span></summary>
+    <div class="method-body">
+      <p><strong>What this tool does.</strong> It estimates the <em>material-production</em> footprint of a garment by multiplying a per-unit impact factor (kg CO₂e, litres of water, and £ cost — per kg of fibre for fabrics, per m² for leathers) by a typical quantity of material in that product. Comparisons are always made within the same material family, so fabric-per-kg and leather-per-m² figures are never mixed in a single result.</p>
+      <p><strong>What it deliberately does <em>not</em> do.</strong> It is not a certified Life Cycle Assessment. It excludes spinning/weaving energy, dyeing, transport, the consumer-use phase (washing and drying often dominate a garment's real footprint), and end-of-life. Retail price is driven by brand, margin and labour far more than material cost, so the "cost" figure models material cost only. Treat every number as an order-of-magnitude estimate for comparison, not a guarantee.</p>
+      <p><strong>Why confidence ratings.</strong> Much of the published data for novel bio-materials comes from the makers themselves, is run on their best-case formulation, or has no independent LCA at all. Rather than hide that, each material carries a <span class="conf high"><span class="dot"></span>high</span> / <span class="conf medium"><span class="dot"></span>medium</span> / <span class="conf low"><span class="dot"></span>low</span> confidence flag.</p>
+
+      <h4>Material data (illustrative, cradle-to-gate)</h4>
+      <div style="overflow-x:auto">
+        <table class="data" id="dataTable"></table>
+      </div>
+
+      <h4>Selected sources</h4>
+      <div class="srclist" id="srcList"></div>
+    </div>
+  </details>
+
+  <footer class="foot">
+    FIBREPRINT v0.1 — a research prototype, not investment or sustainability advice.<br>
+    Figures are illustrative estimates compiled from public sources for comparison only. Data lives in <code>/data</code> and is editable.
+  </footer>
+</div>
+
+<script src="./app.js"></script>
+</body>
+</html>

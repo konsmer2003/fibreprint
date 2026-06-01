@@ -1,0 +1,13 @@
+[
+  { "id": "tshirt", "name": "T-shirt",      "family": "fabric",  "icon": "👕", "material_qty": 0.20, "unit": "kg fibre" },
+  { "id": "shirt",  "name": "Shirt",        "family": "fabric",  "icon": "🥼", "material_qty": 0.25, "unit": "kg fibre" },
+  { "id": "jumper", "name": "Jumper",       "family": "fabric",  "icon": "🧶", "material_qty": 0.40, "unit": "kg fibre" },
+  { "id": "hoodie", "name": "Hoodie",       "family": "fabric",  "icon": "🧥", "material_qty": 0.55, "unit": "kg fibre" },
+  { "id": "jeans",  "name": "Jeans",        "family": "fabric",  "icon": "👖", "material_qty": 0.70, "unit": "kg fibre" },
+
+  { "id": "wallet", "name": "Wallet",       "family": "leather", "icon": "👛", "material_qty": 0.06, "unit": "m²" },
+  { "id": "belt",   "name": "Belt",         "family": "leather", "icon": "🎗️", "material_qty": 0.15, "unit": "m²" },
+  { "id": "shoes",  "name": "Shoes (pair)", "family": "leather", "icon": "👞", "material_qty": 0.50, "unit": "m²" },
+  { "id": "bag",    "name": "Handbag",      "family": "leather", "icon": "👜", "material_qty": 1.00, "unit": "m²" },
+  { "id": "jacket", "name": "Jacket",       "family": "leather", "icon": "🧥", "material_qty": 3.50, "unit": "m²" }
+]

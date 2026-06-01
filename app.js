@@ -25,6 +25,9 @@ let PRODBYFAM = {};  // family -> [products]
 const CONV_ORDER = ["cotton", "polyester", "nylon", "acrylic", "wool", "viscose", "leather"];
 
 let state = { mode: "compare", conv: null, prod: null, third: null };
+let overrides = {};
+const matVal = (m, f) => overrides[m.id]?.[f] ?? m[f];
+const isEdited = (id, f) => overrides[id]?.[f] != null;
 
 /* ---------- helpers ---------- */
 const $ = s => document.querySelector(s);
@@ -132,9 +135,10 @@ function renderThird() {
 /* ---------- compute ---------- */
 function product() { return PRODUCTS.find(p => p.id === state.prod); }
 
-function metricCard(lab, valHTML, subHTML) {
+function metricCard(lab, valHTML, subHTML, edited) {
   const m = el("div", "metric");
-  m.innerHTML = `<p class="mlab">${lab}</p><div class="mval">${valHTML}</div><div class="msub">${subHTML}</div>`;
+  const editTag = edited ? ' <span class="edited-tag">edited</span>' : '';
+  m.innerHTML = `<p class="mlab">${lab}${editTag}</p><div class="mval">${valHTML}</div><div class="msub">${subHTML}</div>`;
   return m;
 }
 
@@ -146,13 +150,17 @@ function renderCompare() {
   }
   const c = M[state.conv], a = M[state.third], p = product(), q = p.material_qty, unit = p.unit;
 
-  const co2 = { c: c.co2 * q, a: a.co2 * q };
-  const cost = { c: c.cost * q, a: a.cost * q };
-  const water = { c: c.water * q, a: a.water * q };
+  const co2 = { c: matVal(c,'co2') * q, a: matVal(a,'co2') * q };
+  const cost = { c: matVal(c,'cost') * q, a: matVal(a,'cost') * q };
+  const water = { c: matVal(c,'water') * q, a: matVal(a,'water') * q };
 
   const co2save = co2.c - co2.a, co2pct = (co2save / co2.c) * 100;
   const costdelta = cost.a - cost.c, costpct = (costdelta / cost.c) * 100;
   const watersave = water.c - water.a, waterpct = (watersave / water.c) * 100;
+
+  const co2ed = isEdited(c.id,'co2') || isEdited(a.id,'co2');
+  const costed = isEdited(c.id,'cost') || isEdited(a.id,'cost');
+  const watered = isEdited(c.id,'water') || isEdited(a.id,'water');
 
   const co2cls = co2save >= 0 ? "good" : "bad";
   const costcls = costdelta <= 0 ? "good" : "bad";
@@ -196,11 +204,11 @@ function renderCompare() {
 
      <div class="metrics">
        ${metricCard("Carbon", `<span class="${co2cls}">${pctTxt(co2pct)}</span>`,
-        `${co2cls === "good" ? "saves" : "adds"} ~${fmt(Math.abs(co2save))} kg CO₂e · ${fmt(co2.c)}→${fmt(co2.a)}`).outerHTML}
+        `${co2cls === "good" ? "saves" : "adds"} ~${fmt(Math.abs(co2save))} kg CO₂e · ${fmt(co2.c)}→${fmt(co2.a)}`, co2ed).outerHTML}
        ${metricCard("Material cost", `<span class="${costcls}">${costdelta <= 0 ? "−" : "+"}${money(Math.abs(costdelta))}</span>`,
-        `${costcls === "good" ? "cheaper" : "pricier"} · ${money(cost.c)}→${money(cost.a)} (${costdelta <= 0 ? "−" : "+"}${Math.abs(Math.round(costpct))}%)`).outerHTML}
+        `${costcls === "good" ? "cheaper" : "pricier"} · ${money(cost.c)}→${money(cost.a)} (${costdelta <= 0 ? "−" : "+"}${Math.abs(Math.round(costpct))}%)`, costed).outerHTML}
        ${metricCard("Water", `<span class="${watersave >= 0 ? "good" : "bad"}">${pctTxt(waterpct)}</span>`,
-        `${watersave >= 0 ? "saves" : "adds"} ~${fmt(Math.abs(watersave))} L · ${fmt(water.c)}→${fmt(water.a)}`).outerHTML}
+        `${watersave >= 0 ? "saves" : "adds"} ~${fmt(Math.abs(watersave))} L · ${fmt(water.c)}→${fmt(water.a)}`, watered).outerHTML}
      </div>
 
      <div class="bars">
@@ -234,21 +242,22 @@ function renderRecommend() {
   const conv = M[state.conv], p = product(), q = p.material_qty, unit = p.unit, pr = state.third;
 
   const rows = (ALTS[state.conv] || []).map(id => {
-    const a = M[id], co2 = a.co2 * q, cost = a.cost * q, water = a.water * q;
+    const a = M[id], co2 = matVal(a,'co2') * q, cost = matVal(a,'cost') * q, water = matVal(a,'water') * q;
     let score, val, uu;
     if (pr === "carbon") { score = -co2; val = fmt(co2); uu = "kg CO₂e"; }
     else if (pr === "cost") { score = -cost; val = money(cost); uu = "material £"; }
     else if (pr === "water") { score = -water; val = fmt(water); uu = "L water"; }
     else if (pr === "durability") { score = a.attributes.durability; val = a.attributes.durability + "/5"; uu = "durability"; }
     else { score = a.attributes.biodegradable; val = a.attributes.biodegradable + "/5"; uu = "biodegradability"; }
-    return { id, a, co2, cost, water, score, val, uu };
+    const anyEdited = isEdited(id,'co2') || isEdited(id,'cost') || isEdited(id,'water');
+    return { id, a, co2, cost, water, score, val, uu, anyEdited };
   }).sort((x, y) => y.score - x.score);
 
   const prName = PRIORITIES.find(x => x.id === pr).name.toLowerCase();
 
   function tradeoff(w) {
     const a = w.a, notes = [];
-    if (pr !== "cost" && a.cost * q > conv.cost * q * 1.15) notes.push("costs more than the conventional material");
+    if (pr !== "cost" && matVal(a,'cost') * q > matVal(conv,'cost') * q * 1.15) notes.push("costs more than the conventional material");
     if (pr !== "durability" && a.attributes.durability <= 2) notes.push("lower durability");
     if (pr !== "biodegradable" && a.attributes.biodegradable <= 2) notes.push("limited biodegradability");
     if (a.attributes.microplastic_safe <= 1) notes.push("still sheds microplastics");
@@ -263,7 +272,7 @@ function renderRecommend() {
        <div class="rankrow ${i === 0 ? "win" : ""}">
          <div class="pos">${i + 1}</div>
          <div class="rmid">
-           <p class="rname">${w.a.icon} ${w.a.name} ${i === 0 ? '<span class="winflag">best for ' + prName + '</span>' : ''} ${wasteBadge(w.a)} ${confBadge(w.a.confidence)}</p>
+           <p class="rname">${w.a.icon} ${w.a.name} ${i === 0 ? '<span class="winflag">best for ' + prName + '</span>' : ''} ${w.anyEdited ? '<span class="edited-tag">edited</span>' : ''} ${wasteBadge(w.a)} ${confBadge(w.a.confidence)}</p>
            <p class="rwhy">${i === 0 ? tradeoff(w) : w.a.note}</p>
          </div>
          <div class="rmet"><div class="rv">${w.val}</div><div class="ru">${w.uu}</div></div>
@@ -291,10 +300,77 @@ function renderMethod() {
     .join("<br>");
 }
 
+/* ---------- assumptions ---------- */
+function renderAssumptions() {
+  const host = $("#assumptions");
+  if (!(state.conv && state.prod && state.third)) { host.innerHTML = ""; return; }
+
+  const wasOpen = host.querySelector("details")?.open;
+  const ids = state.mode === "compare"
+    ? [state.conv, state.third]
+    : [state.conv, ...(ALTS[state.conv] || [])];
+
+  const conv = M[state.conv];
+  const unitLabel = conv.family === "fabric" ? "/kg" : "/m²";
+  const anyOverride = ids.some(id => overrides[id] && Object.keys(overrides[id]).length);
+
+  function fieldHTML(m, f, label, step) {
+    const edited = isEdited(m.id, f);
+    return `<label class="assume-field${edited ? " overridden" : ""}">
+      <span class="afl">${label}</span>
+      <input type="number" min="0" step="${step}" data-id="${m.id}" data-field="${f}" value="${matVal(m, f)}">
+      ${edited ? '<span class="edited-tag">edited</span>' : ''}
+    </label>`;
+  }
+
+  const matHTML = ids.map(id => {
+    const m = M[id];
+    const hasOv = overrides[m.id] && Object.keys(overrides[m.id]).length;
+    return `<div class="assume-mat">
+      <p class="assume-name">${m.icon} ${m.name}${hasOv ? ` <button class="reset-mat" data-id="${m.id}">↺ reset</button>` : ""}</p>
+      <div class="assume-fields">
+        ${fieldHTML(m, "co2", `CO₂e ${unitLabel}`, "0.1")}
+        ${fieldHTML(m, "cost", `Cost £${unitLabel}`, "0.01")}
+        ${fieldHTML(m, "water", `Water L${unitLabel}`, "1")}
+      </div>
+    </div>`;
+  }).join("");
+
+  host.innerHTML = `<details class="assume-panel"${wasOpen ? " open" : ""}>
+    <summary>Edit assumptions <span class="plus">+</span>${anyOverride ? ' <span class="overrides-active">overrides active</span>' : ""}</summary>
+    <div class="assume-body">
+      <p class="assume-note">Override any figure to recompute results live. Values stay in memory only — never saved or stored.</p>
+      ${anyOverride ? '<button class="reset-all-btn">↺ Reset all to sourced defaults</button>' : ""}
+      <div class="assume-grid">${matHTML}</div>
+    </div>
+  </details>`;
+
+  host.querySelectorAll("input[data-id]").forEach(inp => {
+    inp.addEventListener("change", () => {
+      const id = inp.dataset.id, f = inp.dataset.field;
+      const v = parseFloat(inp.value);
+      if (!isNaN(v) && v >= 0) {
+        (overrides[id] = overrides[id] || {})[f] = v;
+      } else {
+        if (overrides[id]) { delete overrides[id][f]; if (!Object.keys(overrides[id]).length) delete overrides[id]; }
+      }
+      renderAll();
+    });
+  });
+
+  host.querySelectorAll(".reset-mat").forEach(btn => {
+    btn.addEventListener("click", e => { e.preventDefault(); delete overrides[btn.dataset.id]; renderAll(); });
+  });
+
+  const resetAll = host.querySelector(".reset-all-btn");
+  if (resetAll) resetAll.addEventListener("click", () => { overrides = {}; renderAll(); });
+}
+
 /* ---------- orchestrate ---------- */
 function renderAll() {
   renderConv(); renderProd(); renderThird();
   if (state.mode === "compare") renderCompare(); else renderRecommend();
+  renderAssumptions();
 }
 
 document.querySelectorAll(".tab").forEach(tab => {

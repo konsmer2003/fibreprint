@@ -15,5 +15,10 @@
   "hempf":      { "label": "Hemp Foundation — 7 major fibres and their carbon footprint", "url": "https://hempfoundation.net/7-major-fibers-textiles-in-the-world-and-their-carbon-footprint/" },
   "tand":       { "label": "Taylor & Francis — Carbon footprint embodied in global fibre trades", "url": "https://www.tandfonline.com/doi/full/10.1080/15440478.2025.2503970" },
   "cfp":        { "label": "Carbon Footprint of Textile and Clothing Products (ResearchGate)", "url": "https://www.researchgate.net/publication/276193965_Carbon_Footprint_of_Textile_and_Clothing_Products" },
-  "co2e":       { "label": "CO2 Everything — Linen footprint", "url": "https://www.co2everything.com/co2e-of/linen" }
+  "co2e":       { "label": "CO2 Everything — Linen footprint", "url": "https://www.co2everything.com/co2e-of/linen" },
+  "cornell":    { "label": "Cornell eCommons — The carbon footprint of leather: a comprehensive reassessment (peer-reviewed meta-analysis)", "url": "https://ecommons.cornell.edu/entities/publication/40bc5869-8243-4656-bb11-da8189ebc503" },
+  "carbonfact": { "label": "Carbonfact — The Life Cycle Assessment of Leather (LWG 2024 LCA; 22.48 kg CO₂e/m²)", "url": "https://www.carbonfact.com/blog/knowledge/leather-carbon-impact" },
+  "pgkg":       { "label": "Zhou et al. 2025, Pige Kexue Yu Gongcheng — LCA of bovine upholstery leather (peer-reviewed; 11.6 kg CO₂e/m²)", "url": "https://doaj.org/article/6f66a8bfdcd54232af126fe55ee6309c" },
+  "mycoworks":  { "label": "Williams et al. 2022, Environmental Sciences Europe — LCA of MycoWorks' Reishi (peer-reviewed, MycoWorks-funded; 2.76 kg CO₂e/m²)", "url": "https://enveurope.springeropen.com/articles/10.1186/s12302-022-00689-x" },
+  "dessertolca":{ "label": "Desserto — early-stage ISO 14040/44 LCA (maker-reported, cactus leather; ~1.4 kg CO₂e/m²)", "url": "https://desserto.com.mx/e-lca" }
 }

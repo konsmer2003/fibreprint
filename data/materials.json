@@ -314,8 +314,8 @@
     "water": 17000,
     "attributes": { "durability": 5, "water_resist": 4, "breathability": 4, "biodegradable": 3, "microplastic_safe": 5 },
     "confidence": "medium",
-    "note": "~73–110 kg CO₂e/m²; cattle rearing dominates the footprint. Chrome tanning produces hazardous wastewater, so 'biodegradable' is heavily qualified. Extremely durable.",
-    "sources": ["cfj", "ecocult", "kyrei"]
+    "note": "Hugely allocation-dependent. Under economic allocation — which assigns only ~2% of cattle impact to the hide — peer-reviewed LCAs land at ~12–22 kg CO₂e/m² (Zhou et al. 11.6; Carbonfact 22.48). On a full-boundary basis that includes cattle rearing it is ~73–110 kg/m², the figure used here. A top-down meta-analysis goes higher still, ~110–190 kg CO₂e per kg of finished leather. Cattle rearing dominates either way; chrome tanning adds hazardous wastewater, so 'biodegradable' is heavily qualified. Extremely durable. The allocation method, not the material, drives most of this spread.",
+    "sources": ["cfj", "ecocult", "kyrei", "carbonfact", "pgkg", "cornell"]
   },
   {
     "id": "cactus",
@@ -331,8 +331,8 @@
     "water": 100,
     "attributes": { "durability": 4, "water_resist": 4, "breathability": 3, "biodegradable": 2, "microplastic_safe": 3 },
     "confidence": "low",
-    "note": "Maker-run LCA was on the least-PU (≈30% bio) version; commercial material is ~25–30% bio-PU, so true biodegradability is limited. Slightly less durable than animal leather.",
-    "sources": ["ecocult", "bohema"]
+    "note": "The only LCA available is Desserto's own (ISO 14040/44 but early-stage, maker-funded, run on the least-PU ≈30%-bio version): it reports ~1.4 kg CO₂e/m². The 4 used here is deliberately more conservative. Commercial material is ~25–30% bio-PU, so true biodegradability is limited, and the widely-quoted 'carbon-negative farm' claim is a farm-level figure that excludes the PU/polyester. Slightly less durable than animal leather.",
+    "sources": ["ecocult", "bohema", "dessertolca"]
   },
   {
     "id": "grape",
@@ -399,8 +399,8 @@
     "water": 300,
     "attributes": { "durability": 4, "water_resist": 3, "breathability": 4, "biodegradable": 4, "microplastic_safe": 4 },
     "confidence": "low",
-    "note": "Strikingly high for a 'natural' material (~57 kg CO₂e/m²). Whether it beats animal leather depends entirely on which leather figure you trust: it's well below the full-boundary bovine estimate used here (~100, incl. cattle rearing) but WORSE than low-end estimates (~22). A vivid lesson in how the chosen benchmark — not the material — can decide the verdict.",
-    "sources": ["kyrei"]
+    "note": "'Mycelium leather' is really two materials. Active, CO₂-fed growth (Mylo-type) is energy-intensive — the ~57 kg CO₂e/m² used here. Passive growth (MycoWorks' Reishi) is roughly two orders of magnitude lower: its peer-reviewed but maker-funded LCA reports ~2.76 kg CO₂e/m². So the verdict versus animal leather flips entirely on which process AND which bovine benchmark you pick — 57 beats the full-boundary bovine figure (~100) but loses to low-end estimates (~22). A vivid lesson in how process route and chosen benchmark, not 'is it natural?', decide the answer. The 57 figure's provenance is weak; treat as indicative.",
+    "sources": ["kyrei", "mycoworks"]
   },
   {
     "id": "cork",

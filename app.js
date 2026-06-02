@@ -103,8 +103,11 @@ function renderConv() {
 function renderProd() {
   const host = $("#prodChips"); host.innerHTML = "";
   if (!state.conv) { host.innerHTML = `<span class="hint">Pick a material first.</span>`; return; }
-  const fam = M[state.conv].family;
-  (PRODBYFAM[fam] || []).forEach(p => {
+  const mat = M[state.conv];
+  const excluded = new Set(mat.excludeGarments || []);
+  const visible = (PRODBYFAM[mat.family] || []).filter(p => !excluded.has(p.id));
+  if (state.prod && excluded.has(state.prod)) state.prod = visible[0]?.id ?? null;
+  visible.forEach(p => {
     const c = chip(p.name, p.icon, state.prod === p.id, "");
     c.onclick = () => { state.prod = p.id; renderAll(); };
     host.appendChild(c);

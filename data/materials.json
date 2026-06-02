@@ -27,6 +27,7 @@
     "cost": 1.3,
     "water": 500,
     "attributes": { "durability": 4, "water_resist": 5, "breathability": 2, "biodegradable": 1, "microplastic_safe": 1 },
+    "excludeGarments": ["jeans"],
     "confidence": "medium",
     "note": "Cheap and low-water, but fossil-derived, sheds microplastics every wash and is effectively non-biodegradable.",
     "sources": ["matecon", "wri"]
@@ -43,6 +44,7 @@
     "cost": 2.2,
     "water": 600,
     "attributes": { "durability": 5, "water_resist": 5, "breathability": 2, "biodegradable": 1, "microplastic_safe": 1 },
+    "excludeGarments": ["shirt", "jumper", "hoodie", "jeans"],
     "confidence": "low",
     "note": "Production can release nitrous oxide, a greenhouse gas ~270× as potent as CO₂. Strong and water-resistant, but fossil-based and microplastic-shedding.",
     "sources": ["matecon", "tand"]
@@ -59,6 +61,7 @@
     "cost": 1.2,
     "water": 400,
     "attributes": { "durability": 3, "water_resist": 4, "breathability": 2, "biodegradable": 1, "microplastic_safe": 1 },
+    "excludeGarments": ["tshirt", "shirt", "jeans"],
     "confidence": "low",
     "note": "Fossil-based 'fake wool'. Sheds microplastics heavily and can persist ~200 years in landfill.",
     "sources": ["hempf", "tand"]
@@ -75,6 +78,7 @@
     "cost": 9,
     "water": 5000,
     "attributes": { "durability": 4, "water_resist": 2, "breathability": 5, "biodegradable": 4, "microplastic_safe": 5 },
+    "excludeGarments": ["shirt", "hoodie", "jeans"],
     "confidence": "low",
     "note": "Estimates range wildly (~5–80 kg CO₂e/kg) depending on how sheep methane is allocated — rumination dominates. A prime example of why allocation method, not just material, drives the number.",
     "sources": ["geopelie", "cfp", "ethicalc"]
@@ -91,6 +95,7 @@
     "cost": 2.0,
     "water": 4000,
     "attributes": { "durability": 3, "water_resist": 2, "breathability": 4, "biodegradable": 4, "microplastic_safe": 5 },
+    "excludeGarments": ["hoodie", "jeans"],
     "confidence": "medium",
     "note": "Per-kg CO₂ is moderate, but the real harm is the toxic solvent process (caustic soda, carbon disulfide) and links to deforestation. Cleaner versions are sold as lyocell/Tencel.",
     "sources": ["geopelie", "ethicalc"]

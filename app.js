@@ -230,7 +230,7 @@ function renderCompare() {
      </div>
 
      <div class="caveats">
-       <p class="blab">⚑ Read before quoting these numbers</p>
+       <p class="blab">⚑ The fine print</p>
        <ul>${caveats.map(x => `<li>${x}</li>`).join("")}</ul>
      </div>
    </div>`;
